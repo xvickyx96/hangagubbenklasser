@@ -1,0 +1,71 @@
+package Ord;
+
+import Wordlist.Wordlist;
+import java.util.ArrayList;
+import java.util.Scanner;
+public class Spelet {
+    private ArrayList<String> history;
+    private Ord ord;
+
+    public void game() {
+        Wordlist wordlist = new Wordlist();
+        String ordet = wordlist.getRandomWord();
+        ord = new Ord(ordet);
+
+        history = new ArrayList<>();
+
+        int guesses = 0;
+
+
+        while (!checkForWinner()) {
+            guesses++;
+
+            String guess = gissa();
+
+            if (guess.equalsIgnoreCase("lägg av")) {
+                avslutaSpel();
+            }
+            else if (history.contains(guess.toLowerCase())) {
+                System.out.println("Var inte så fantasilös! Gissa på något annat!");
+            }
+            else {
+                checkGuess(guess.toLowerCase());
+            }
+        }
+
+        System.out.println(ord.getGuess());
+        System.out.println("Game Over");
+    }
+
+    private void checkGuess(String guess) {
+        if (guess.equalsIgnoreCase(ord.getWord())) {
+            ord.setGuess(ord.getWord());
+            System.out.println("Grattis! Du gissade hela ordet: " + ord.getWord());
+            avslutaSpel();
+        } else if (ord.contains(guess)) {
+            ord.replaceGuess(guess);
+            history.add(guess);
+        } else {
+            System.out.println("Fel gissning!");
+        }
+    }
+
+
+    public String gissa() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Gissa ordet: " + ord.getGuess());
+        System.out.print("Gissa en bokstav: ");
+        return scanner.nextLine();
+    }
+
+
+    public void avslutaSpel() {
+        System.exit(0);
+    }
+
+    public boolean checkForWinner() {
+        return ord.hasGuessed();
+    }
+
+
+}
