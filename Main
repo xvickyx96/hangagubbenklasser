@@ -1,0 +1,9 @@
+import Ord.Spelet;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello world!");
+        Spelet spelet = new Spelet();
+        spelet.game();
+    }
+}
