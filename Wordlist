@@ -1,0 +1,43 @@
+package Wordlist;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Wordlist {
+
+    private ArrayList<String> wordList;
+    private String currentWord;
+
+    public Wordlist() {
+        wordList = new ArrayList<>();
+        wordList.add("katt");
+        wordList.add("hund");
+        wordList.add("morot");
+        wordList.add("äpple");
+        wordList.add("handsprit");
+        wordList.add("lejon");
+        wordList.add("valp");
+        wordList.add("åsna");
+        wordList.add("tjuv");
+        wordList.add("polis");
+    }
+
+    public String getRandomWord() {
+        Random rand = new Random();
+        int index = rand.nextInt(wordList.size());
+        currentWord = wordList.get(index);
+        return currentWord;
+    }
+
+    public void addWord(String word) {
+        wordList.add(word.toLowerCase());
+    }
+
+    public void removeWord(String word) {
+        wordList.remove(word.toLowerCase());
+    }
+
+    public String getCurrentWord() {
+        return currentWord;
+    }
+}
