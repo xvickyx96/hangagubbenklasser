@@ -1,0 +1,44 @@
+package Ord;
+
+public class Ord {
+    public String ord;
+    public String guess;
+
+    public Ord(String word) {
+        this.ord = word.toLowerCase();
+        this.guess = "-".repeat(word.length());
+    }
+
+
+    public String getWord() {
+        return ord;
+    }
+
+    public String getGuess() {
+        return guess;
+    }
+
+    public boolean contains(String letter) {
+        return ord.indexOf(letter.toLowerCase()) != -1;
+    }
+
+    public void replaceGuess(String guess) {
+        guess = guess.toLowerCase();
+        StringBuilder newGuess = new StringBuilder(this.guess);
+        for (int i = 0; i < ord.length(); i++) {
+            if (ord.charAt(i) == guess.charAt(0)) {
+                newGuess.setCharAt(i, guess.charAt(0));
+            }
+        }
+        this.guess = newGuess.toString();
+    }
+
+    public boolean hasGuessed() {
+        return guess.equalsIgnoreCase(ord);
+    }
+
+    public String setGuess(String word) {
+        return getWord();
+    }
+}
+
